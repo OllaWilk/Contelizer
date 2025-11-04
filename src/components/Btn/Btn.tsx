@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import styles from './Btn.module.scss';
 
 interface Props {
@@ -7,8 +6,8 @@ interface Props {
 }
 export const Btn = ({ text, url }: Props) => {
   return (
-    <Link to={url} className={styles.detailsBtn}>
+    <a href={url} className={styles.detailsBtn}>
       {text}
-    </Link>
+    </a>
   );
 };
