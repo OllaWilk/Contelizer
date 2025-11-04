@@ -1,0 +1,67 @@
+@forward 'normalize';
+@forward 'variables';
+@forward 'mixins';
+@forward 'theme';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: linear-gradient(180deg, var(--bg) 0%, var(--bg) 100%);
+  font-family: var(--text-font);
+  line-height: 1.5;
+  color: var(--text);
+  letter-spacing: 0.5px;
+  overflow: visible;
+  line-height: 1.7;
+  text-align: justify;
+  white-space: normal;
+}
+
+a {
+  color: var(--text);
+  text-decoration: none;
+  transition: var(--transition);
+  letter-spacing: 0.7px;
+
+  &:hover {
+    text-decoration: none;
+    color: var(--accent);
+  }
+}
+
+ul {
+  text-decoration: none;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  text-decoration: none;
+  list-style-type: none;
+}
+
+input {
+  border: none;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+}
+
+.container {
+  position: relative;
+  max-width: 1200px;
+  width: 80vw;
+  min-height: 70vh;
+  margin: 0 auto;
+  overflow: hidden;
+}

@@ -1,0 +1,13 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.detailsBtn {
+  @include btn();
+  border-radius: $border-radius;
+  font-size: 0.85rem;
+
+  @include sm-max {
+    padding: 0.6rem 1rem;
+    font-size: 0.8rem;
+  }
+}

@@ -1,0 +1,20 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.details {
+  @include container;
+  padding: 48px 0 64px;
+  color: var(--text);
+}
+
+.header {
+  display: grid;
+  grid-template-columns: 520px 1fr;
+  gap: 32px;
+  align-items: stretch;
+  margin-bottom: 32px;
+
+  @include lg-max {
+    grid-template-columns: 1fr;
+  }
+}

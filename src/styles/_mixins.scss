@@ -1,0 +1,131 @@
+@use './variables' as *;
+
+@mixin img {
+  width: 100%;
+  height: 100%;
+}
+
+@mixin container {
+  position: relative;
+  max-width: 1200px;
+  width: 80vw;
+  margin: 0 auto;
+  overflow: hidden;
+  
+
+  @include sm-max {
+    width: 90vw;
+  }
+}
+
+@mixin btn(
+  $bg: var(--accent),
+  $color: var(--bg),
+  $hover-bg: var(--secondary),
+  $radius: var(--radius),
+  $font-weight: 600
+) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: $radius;
+  cursor: pointer;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: $color;
+  background: $bg;
+  letter-spacing: 0.05em;
+  transition: $transition;
+  box-shadow: var(--box-shadow);
+
+  &:hover {
+    background: $hover-bg;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    color: var(--bg)
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  }
+
+  &:focus-visible {
+    outline: 2px solid rgba(255, 165, 0, 0.6);
+    outline-offset: 3px;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+}
+
+@mixin flex($flex-direction, $align-items, $justify-content) {
+  display: flex;
+  flex-direction: $flex-direction;
+  align-items: $align-items;
+  justify-content: $justify-content;
+}
+
+// Mobile devices
+
+@mixin mini {
+  @media screen and (max-width: 244px) {
+    @content;
+  }
+}
+
+@mixin sm-max {
+  @media screen and (max-width: 480px) {
+    @content;
+  }
+}
+
+@mixin sm-min {
+  @media screen and (min-width: 480px) {
+    @content;
+  }
+}
+
+// Tablet devices
+@mixin md-max {
+  @media screen and (max-width: 768px) {
+    @content;
+  }
+}
+
+@mixin md-min {
+  @media screen and (min-width: 768px) {
+    @content;
+  }
+}
+
+// Desctop devices
+@mixin lg-max {
+  @media screen and (max-width: 992px) {
+    @content;
+  }
+}
+
+@mixin lg-min {
+  @media screen and (min-width: 992px) {
+    @content;
+  }
+}
+
+// Large-desctop devices
+@mixin xl-max {
+  @media screen and (max-width: 1111px) {
+    @content;
+  }
+}
+
+@mixin xl-min {
+  @media screen and (min-width: 1200px) {
+    @content;
+  }
+}
