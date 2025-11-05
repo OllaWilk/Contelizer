@@ -3,18 +3,17 @@
 
 .taskOne {
   padding-inline: clamp(16px, 4vw, 48px);
-  
+
   .grid {
     display: grid;
     grid-template-columns: 1.05fr 0.95fr;
     gap: clamp(16px, 2.2vw, 32px);
     align-items: start;
     margin-top: clamp(20px, 3vw, 36px);
-    
+
     @media (max-width: 900px) {
       grid-template-columns: 1fr;
-    } 
-    
+    }
 
     .output {
       white-space: pre-wrap;
@@ -25,21 +24,11 @@
       padding: clamp(12px, 2vw, 18px);
       min-height: 330px;
       margin-top: 1rem;
-     
     }
   }
 }
 
-    .formActions {
-      @include flex( row, center, center);
-      gap: 1rem;
-      
-      .buttonReset {
-        @include btn (transparent, var(--accent, ), var(--text), 8px);
-      }
-
-      .submitBtn {
-        @include btn (var(--accent), var(--card), var(--text), 8px);
-      }
-  
-    }
+.formActions {
+  @include flex(row, center, center);
+  gap: 1rem;
+}
