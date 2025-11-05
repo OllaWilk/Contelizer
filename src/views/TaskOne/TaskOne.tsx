@@ -1,10 +1,36 @@
-import { Card, Input, TaskHeader, Textarea } from "../../components";
+import { useState } from "react";
+import type { FormData } from "../../types/task-one-types";
+import { handleFileSelect } from "./utils/handleFileSelect";
+import { readTextFile } from "./utils/readTextFile";
+import { Card, Input, TaskHeader } from "../../components";
 import styles from "./TaskOne.module.scss";
 
 export const TaskOne = () => {
-  const handleFile = () => {
-    console.log("handleFile");
+  const [formData, setFormData] = useState<FormData>({ file: null, text: "" });
+  const [fileKey, setFileKey] = useState(0);
+
+  const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    handleFileSelect(e, setFormData);
   };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!formData.file) return;
+    const form = e.currentTarget as HTMLFormElement;
+
+    const text = await readTextFile(formData.file!);
+    setFormData((prev) => ({ ...prev, text, file: null }));
+    form.currentTarget.reset();
+    setFileKey((k) => k + 1);
+  };
+
+  const handleReset = () => {
+    setFormData({ file: null, text: "" });
+
+    setFileKey((k) => k + 1);
+  };
+
   return (
     <section className={styles.taskOne}>
       <TaskHeader
@@ -14,26 +40,35 @@ export const TaskOne = () => {
       />
       <div className={styles.grid}>
         <Card className={styles.left}>
-          <Input
-            label="Uppload file .txt"
-            id="file"
-            type="file"
-            accept=".txt,text/plain"
-            onChange={handleFile}
-          />
-          <Textarea
-            id="text"
-            value={""}
-            onChange={(e) => console.log(e.target.value)}
-            placeholder="Paste your text here or upload a file..."
-            rows={12}
-          />
+          <form
+            onSubmit={handleSubmit}
+            onReset={() => setFormData({ file: null, text: "" })}
+            noValidate
+          >
+            <h3>Uppload file .txt</h3>
+            <Input
+              key={fileKey}
+              id="file"
+              type="file"
+              accept=".txt,text/plain"
+              onChange={onFileChange}
+            />
+            <div className={styles.formActions}>
+              <button className={styles.buttonReset} onClick={handleReset}>
+                Reset
+              </button>
+              <button type="submit" className={styles.submitBtn}>
+                Submit
+              </button>
+            </div>
+          </form>
         </Card>
         <Card className={styles.right}>
-          <h3>Twój tekst</h3>
-
+          <h3>Your text</h3>
           <div className={styles.output} aria-live="polite">
-            {"A preview will be visible after entering text."}
+            {formData.text
+              ? formData.text
+              : "A preview will be visible after entering text."}
           </div>
         </Card>
       </div>

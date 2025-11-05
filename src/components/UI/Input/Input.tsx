@@ -7,7 +7,7 @@ type NativeInputProps = Omit<
 >;
 
 interface Props extends NativeInputProps {
-  label: string;
+  label?: string;
   id: string;
   error?: string;
   className?: string;
