@@ -1,16 +1,68 @@
-import { TaskHeader } from "../../components";
+import { useState, useRef } from 'react';
+import { UI_TEXTS } from './content';
+import type { FormData } from '../../types/task-one-types';
+import { validateFile } from './utils/validateFile';
+import { readTextFile } from './utils/readTextFile';
+import { Card, ErrorBlock, FormButton, Input, TaskHeader } from '../../components';
+import styles from './TaskOne.module.scss';
+import { useFileField } from './hooks/useFileField';
 
 export const TaskOne = () => {
+  const [formData, setFormData] = useState<FormData>({ file: null, text: '' });
+  const { file, error, onChange, reset, validateBeforeSubmit } = useFileField();
+
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (!validateBeforeSubmit()) return;
+    if (file) {
+      const msg = validateFile(file);
+
+      if (msg) return;
+
+      const text = await readTextFile(file);
+      setFormData({ file: null, text });
+    }
+    reset();
+    if (fileInputRef.current) fileInputRef.current.value = '';
+  };
+
+  const handleReset = () => {
+    setFormData({ file: null, text: '' });
+    reset();
+    if (fileInputRef.current) fileInputRef.current.value = '';
+  };
+
   return (
-    <div>
-      <TaskHeader text={"Recruitment Task 1"} />
-      <p>
-        Write a React program that includes a form for uploading a text file.
-        After uploading, the program should randomly shuffle the order of the
-        letters in each word, except for the first and last letters. Make sure
-        to handle punctuation, uppercase/lowercase letters, multiline texts, and
-        Polish characters properly.
-      </p>
-    </div>
+    <section className={styles.taskOne}>
+      <TaskHeader paragraph={UI_TEXTS.task} />
+      <div className={styles.grid}>
+        <Card className={styles.left}>
+          <form onSubmit={handleSubmit} onReset={() => setFormData({ file: null, text: '' })}>
+            <h3>{UI_TEXTS.uploadFile}</h3>
+            <Input
+              ref={fileInputRef}
+              id="file"
+              type="file"
+              accept=".txt,text/plain"
+              onChange={onChange}
+            />
+            {error && <ErrorBlock title={'ups'} message={error} />}
+            <div className={styles.formActions}>
+              <FormButton variant="reset" onClick={handleReset} text={UI_TEXTS.reset} />
+              <FormButton variant="submit" text={UI_TEXTS.submit} />
+            </div>
+          </form>
+        </Card>
+        <Card className={styles.right}>
+          <h3>{UI_TEXTS.resultTitle}</h3>
+          <div className={styles.output} aria-live="polite">
+            {formData.text ? formData.text : UI_TEXTS.previewInfo}
+          </div>
+        </Card>
+      </div>
+    </section>
   );
 };

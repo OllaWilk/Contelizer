@@ -1,6 +1,10 @@
-export { Footer } from "./Footer/Footer";
-export { Navbar } from "./Navbar/Navbar";
-export { Header } from "./Header/Header";
-export { LoadingIndicator } from "./UI/LoadingIndicator/LoadingIndicator";
-export { ErrorBlock } from "./UI/ErrorBlick/ErrorBlock";
-export { TaskHeader } from "./UI/TaskHeader/TaskHeader";
+export { Footer } from './Footer/Footer';
+export { Navbar } from './Navbar/Navbar';
+export { Header } from './Header/Header';
+export { LoadingIndicator } from './UI/LoadingIndicator/LoadingIndicator';
+export { ErrorBlock } from './UI/ErrorBlick/ErrorBlock';
+export { TaskHeader } from './UI/TaskHeader/TaskHeader';
+export { Input } from './UI/Input/Input';
+export { Textarea } from './UI/Textarea/Textarea';
+export { Card } from './UI/Card/Card';
+export { FormButton } from './UI/FormButton/FormButton';
