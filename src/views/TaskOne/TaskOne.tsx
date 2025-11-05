@@ -1,66 +1,33 @@
 import { useState } from 'react';
 import { UI_TEXTS } from './content';
 import type { FormData } from '../../types/task-one-types';
-import { handleFileSelect } from './utils/handleFileSelect';
 import { validateFile } from './utils/validateFile';
 import { readTextFile } from './utils/readTextFile';
 import { Card, ErrorBlock, FormButton, Input, TaskHeader } from '../../components';
 import styles from './TaskOne.module.scss';
+import { useFileField } from './hooks/useFileField';
 
 export const TaskOne = () => {
   const [formData, setFormData] = useState<FormData>({ file: null, text: '' });
-  const [fileKey, setFileKey] = useState(0);
-  const [error, setError] = useState<string | null>(null);
+  const { file, error, onChange, reset, resetSignal } = useFileField();
 
-  const clearFileInput = () => setFileKey((k) => k + 1);
-
-  const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0] ?? null;
-
-    if (!file) {
-      handleFileSelect(null, setFormData);
-      setError('');
-      return;
-    }
-
-    const msg = validateFile(file);
-    if (msg) {
-      setError(msg);
-      handleFileSelect(null, setFormData);
-      clearFileInput();
-      return;
-    }
-    setError(null);
-    handleFileSelect(file, setFormData);
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const file = formData.file;
 
-    if (!file) {
-      setError('Please choose a .txt file before submitting.');
-      return;
-    }
+    if (!file) return;
 
     const msg = validateFile(file);
-    if (msg) {
-      setError(msg);
-      return;
-    }
+    if (msg) return;
 
-    setError(null);
     const text = await readTextFile(file);
-    setFormData((prev) => ({ ...prev, text, file: null }));
-
-    (e.currentTarget as HTMLFormElement).reset();
-    clearFileInput();
+    setFormData({ file: null, text });
+    reset();
+    e.currentTarget.reset();
   };
 
   const handleReset = () => {
     setFormData({ file: null, text: '' });
-    setError(null);
-    clearFileInput();
+    reset();
   };
 
   return (
@@ -75,11 +42,11 @@ export const TaskOne = () => {
           >
             <h3>{UI_TEXTS.uploadFile}</h3>
             <Input
-              key={fileKey}
               id="file"
               type="file"
               accept=".txt,text/plain"
-              onChange={onFileChange}
+              onChange={onChange}
+              resetSignal={resetSignal}
             />
             {error && <ErrorBlock title={'ups'} message={error} />}
             <div className={styles.formActions}>

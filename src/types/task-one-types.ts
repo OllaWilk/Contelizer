@@ -4,3 +4,11 @@ export interface FormData {
 }
 
 export type Errors = { file?: string };
+
+export type UseFileFieldResult = {
+  file: File | null;
+  error: string | null;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  reset: () => void;
+  resetSignal: number;
+};
