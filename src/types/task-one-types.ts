@@ -10,5 +10,4 @@ export type UseFileFieldResult = {
   error: string | null;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   reset: () => void;
-  resetSignal: number;
 };

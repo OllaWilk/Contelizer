@@ -5,9 +5,6 @@ import { validateFile } from '../utils/validateFile';
 export const useFileField = (): UseFileFieldResult => {
   const [file, setFile] = useState<File | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [resetFile, setResetFile] = useState(0);
-
-  const clearFileInput = () => setResetFile((k) => k + 1);
 
   const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] ?? null;
@@ -23,7 +20,6 @@ export const useFileField = (): UseFileFieldResult => {
     if (msg) {
       setError(msg);
       setFile(null);
-      clearFileInput();
       return;
     }
 
@@ -34,8 +30,7 @@ export const useFileField = (): UseFileFieldResult => {
   const reset = () => {
     setFile(null);
     setError(null);
-    clearFileInput();
   };
 
-  return { file, error, onChange: onFileChange, reset, resetSignal: resetFile };
+  return { file, error, onChange: onFileChange, reset };
 };
