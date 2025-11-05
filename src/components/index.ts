@@ -8,3 +8,5 @@ export { Input } from './UI/Input/Input';
 export { Textarea } from './UI/Textarea/Textarea';
 export { Card } from './UI/Card/Card';
 export { FormButton } from './UI/FormButton/FormButton';
+export { Output } from './UI/Output/Output';
+export { Btn } from './UI/Btn/Btn';

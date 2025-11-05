@@ -1,6 +1,5 @@
 export const validateFile = (file: File): string | null => {
   const MAX_BYTES = 1_000_000;
-  console.log('validateFile called with file:', file);
 
   const isTXT = file.name.toLowerCase().endsWith('.txt');
   const isTextMime = file.type === 'text/plain';

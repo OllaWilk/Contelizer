@@ -16,7 +16,6 @@ export const useFileField = (): UseFileFieldResult => {
     }
 
     const msg = validateFile(file);
-    console.log('msg', msg);
 
     if (msg) {
       setError(msg);
