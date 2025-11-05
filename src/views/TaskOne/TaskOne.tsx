@@ -1,9 +1,8 @@
 import { TaskHeader } from "../../components";
-import styles from "./TaskOne.module.scss";
 
 export const TaskOne = () => {
   return (
-    <div className={styles.taskOne}>
+    <div>
       <TaskHeader text={"Recruitment Task 1"} />
       <p>
         Write a React program that includes a form for uploading a text file.
