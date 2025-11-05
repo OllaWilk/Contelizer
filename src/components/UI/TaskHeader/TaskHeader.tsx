@@ -1,9 +1,15 @@
 import styles from "./TaskHeader.module.scss";
 
 interface Props {
-  text: string;
+  text?: string;
+  paragraph?: string;
 }
 
-export const TaskHeader = ({ text }: Props) => {
-  return <h2 className={styles.taskHeader}>{text}</h2>;
+export const TaskHeader = ({ text, paragraph }: Props) => {
+  return (
+    <div className={styles.taskHeader}>
+      <h2>{text}</h2>
+      <p>{paragraph}</p>
+    </div>
+  );
 };

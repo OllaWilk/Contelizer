@@ -4,3 +4,6 @@ export { Header } from "./Header/Header";
 export { LoadingIndicator } from "./UI/LoadingIndicator/LoadingIndicator";
 export { ErrorBlock } from "./UI/ErrorBlick/ErrorBlock";
 export { TaskHeader } from "./UI/TaskHeader/TaskHeader";
+export { Input } from "./UI/Input/Input";
+export { Textarea } from "./UI/Textarea/Textarea";
+export { Card } from "./UI/Card/Card";
