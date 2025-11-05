@@ -5,4 +5,5 @@ export const UI_TEXTS = {
   submit: 'Submit',
   resultTitle: 'Shuffled text',
   previewInfo: 'A preview will be visible after entering text.',
+  downloadSample: 'Download sample .txt file',
 };
