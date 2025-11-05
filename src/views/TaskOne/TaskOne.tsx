@@ -3,6 +3,7 @@ import { UI_TEXTS } from './content';
 import type { FormData } from '../../types/task-one-types';
 import { validateFile } from './utils/validateFile';
 import { readTextFile } from './utils/readTextFile';
+import { mixText } from './utils/mixText';
 import { Card, ErrorBlock, FormButton, Input, TaskHeader } from '../../components';
 import styles from './TaskOne.module.scss';
 import { useFileField } from './hooks/useFileField';
@@ -19,9 +20,7 @@ export const TaskOne = () => {
     if (!validateBeforeSubmit()) return;
     if (file) {
       const msg = validateFile(file);
-
       if (msg) return;
-
       const text = await readTextFile(file);
       setFormData({ file: null, text });
     }
@@ -34,6 +33,8 @@ export const TaskOne = () => {
     reset();
     if (fileInputRef.current) fileInputRef.current.value = '';
   };
+
+  const textDisplay = formData.text ? mixText(formData.text) : UI_TEXTS.previewInfo;
 
   return (
     <section className={styles.taskOne}>
@@ -59,7 +60,7 @@ export const TaskOne = () => {
         <Card className={styles.right}>
           <h3>{UI_TEXTS.resultTitle}</h3>
           <div className={styles.output} aria-live="polite">
-            {formData.text ? formData.text : UI_TEXTS.previewInfo}
+            {textDisplay}
           </div>
         </Card>
       </div>
