@@ -3,10 +3,10 @@ import { UI_TEXTS } from './content';
 import type { FormData } from '../../types/task-one-types';
 import { validateFile } from './utils/validateFile';
 import { readTextFile } from './utils/readTextFile';
-import { mixText } from './utils/mixText';
 import { Card, ErrorBlock, FormButton, Input, TaskHeader } from '../../components';
 import styles from './TaskOne.module.scss';
 import { useFileField } from './hooks/useFileField';
+import { useMixedText } from './hooks/useMixedText';
 
 export const TaskOne = () => {
   const [formData, setFormData] = useState<FormData>({ file: null, text: '' });
@@ -34,7 +34,7 @@ export const TaskOne = () => {
     if (fileInputRef.current) fileInputRef.current.value = '';
   };
 
-  const textDisplay = formData.text ? mixText(formData.text) : UI_TEXTS.previewInfo;
+  const textDisplay = useMixedText(formData.text);
 
   return (
     <section className={styles.taskOne}>
