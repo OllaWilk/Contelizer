@@ -6,7 +6,7 @@
 
   .grid {
     display: grid;
-    grid-template-columns: 1.05fr 0.95fr;
+    grid-template-columns: 1fr 1fr;
     gap: clamp(16px, 2.2vw, 32px);
     align-items: start;
     margin-top: clamp(20px, 3vw, 36px);
@@ -15,15 +15,11 @@
       grid-template-columns: 1fr;
     }
 
-    .output {
-      white-space: pre-wrap;
-      line-height: 1.65;
-      background: #0f1013;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 12px;
-      padding: clamp(12px, 2vw, 18px);
-      min-height: 330px;
-      margin-top: 1rem;
+    .leftColumn {
+      display: grid;
+      grid-template-rows: 1fr 1fr;
+      gap: clamp(12px, 1.8vw, 24px);
+      height: 100%;
     }
   }
 }
@@ -31,4 +27,8 @@
 .formActions {
   @include flex(row, center, center);
   gap: 1rem;
+}
+
+.preview {
+  @include flex(row, center, center);
 }
