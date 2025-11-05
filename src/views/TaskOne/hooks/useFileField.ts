@@ -16,10 +16,12 @@ export const useFileField = (): UseFileFieldResult => {
     }
 
     const msg = validateFile(file);
+    console.log('msg', msg);
 
     if (msg) {
       setError(msg);
       setFile(null);
+      console.log('validation message:', msg);
       return;
     }
 
@@ -27,10 +29,18 @@ export const useFileField = (): UseFileFieldResult => {
     setFile(file);
   };
 
+  const validateBeforeSubmit = () => {
+    if (!file) {
+      setError('Please select a .txt file before submitting.');
+      return false;
+    }
+    return true;
+  };
+
   const reset = () => {
     setFile(null);
     setError(null);
   };
 
-  return { file, error, onChange: onFileChange, reset };
+  return { file, error, onChange: onFileChange, reset, validateBeforeSubmit };
 };

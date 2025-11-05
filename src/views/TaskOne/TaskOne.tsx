@@ -9,20 +9,22 @@ import { useFileField } from './hooks/useFileField';
 
 export const TaskOne = () => {
   const [formData, setFormData] = useState<FormData>({ file: null, text: '' });
-  const { file, error, onChange, reset } = useFileField();
+  const { file, error, onChange, reset, validateBeforeSubmit } = useFileField();
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!file) return;
+    if (!validateBeforeSubmit()) return;
+    if (file) {
+      const msg = validateFile(file);
 
-    const msg = validateFile(file);
-    if (msg) return;
+      if (msg) return;
 
-    const text = await readTextFile(file);
-    setFormData({ file: null, text });
+      const text = await readTextFile(file);
+      setFormData({ file: null, text });
+    }
     reset();
     if (fileInputRef.current) fileInputRef.current.value = '';
   };
@@ -33,7 +35,6 @@ export const TaskOne = () => {
     if (fileInputRef.current) fileInputRef.current.value = '';
   };
 
-  console.log(error);
   return (
     <section className={styles.taskOne}>
       <TaskHeader paragraph={UI_TEXTS.task} />
@@ -65,9 +66,3 @@ export const TaskOne = () => {
     </section>
   );
 };
-
-/* Note for reviewer:
-The `fileKey` state is used to force React to re-render the <Input type="file" /> component
-whenever the form is reset or submitted. File inputs in React cannot be directly cleared by
-simply setting their value to an empty string, so changing the `key` effectively unmounts
-and remounts the input, ensuring it resets properly.*/
