@@ -1,13 +1,12 @@
-import { Header } from './components/Header/Header';
-import { Footer } from './components/Footer/Footer';
+import { Outlet } from 'react-router-dom';
+import { Footer, Header } from './components';
 
 export const Layout = () => {
   return (
     <>
       <Header />
       <main className={'container'}>
-        <h2>Frontend Recruitment Test</h2>
-        <p>Environment ready. Tasks coming soon...</p>
+        <Outlet />
       </main>
       <Footer />
     </>

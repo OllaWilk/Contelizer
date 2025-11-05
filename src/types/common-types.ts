@@ -5,7 +5,12 @@ export type NavItem = {
   end?: boolean;
 };
 
-export interface ImportMetaEnv  {
+export type RoutePath = `/${string}`;
+export type RoutesMap = Record<string, RoutePath>;
+
+export type ImageUrl = `https://${string}` | `/${string}`;
+
+export interface ImportMetaEnv {
   readonly VITE_API_URL: string;
 }
 
