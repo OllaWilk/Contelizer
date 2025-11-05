@@ -3,10 +3,10 @@ import { UI_TEXTS } from './content';
 import type { FormData } from '../../types/task-one-types';
 import { validateFile } from './utils/validateFile';
 import { readTextFile } from './utils/readTextFile';
-import { Card, ErrorBlock, FormButton, Input, TaskHeader } from '../../components';
-import styles from './TaskOne.module.scss';
+import { Card, ErrorBlock, FormButton, Input, Output, TaskHeader } from '../../components';
 import { useFileField } from './hooks/useFileField';
 import { useMixedText } from './hooks/useMixedText';
+import styles from './TaskOne.module.scss';
 
 export const TaskOne = () => {
   const [formData, setFormData] = useState<FormData>({ file: null, text: '' });
@@ -59,9 +59,7 @@ export const TaskOne = () => {
         </Card>
         <Card className={styles.right}>
           <h3>{UI_TEXTS.resultTitle}</h3>
-          <div className={styles.output} aria-live="polite">
-            {textDisplay}
-          </div>
+          <Output text={textDisplay} />
         </Card>
       </div>
     </section>

@@ -1,0 +1,10 @@
+.output {
+  white-space: pre-wrap;
+  line-height: 1.65;
+  background: #0f1013;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: clamp(12px, 2vw, 18px);
+  min-height: 330px;
+  margin-top: 1rem;
+}
