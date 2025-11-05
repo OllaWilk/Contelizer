@@ -1,0 +1,33 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+.label {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 16px;
+
+  span {
+    font-size: 14px;
+    color: var(--muted);
+  }
+}
+
+.textarea {
+  width: 100%;
+  padding: 14px 16px;
+  background: var(--input-bg);
+  @include border(0.01);
+  border-radius: 12px;
+  color: var(--text);
+  resize: vertical;
+  line-height: 1.55;
+
+  &:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+}
+
+.controlError {
+    color: var(--accent);
+}

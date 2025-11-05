@@ -29,7 +29,7 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
+  padding: 0.5rem 1.5rem;
   border: none;
   border-radius: $radius;
   cursor: pointer;
@@ -38,7 +38,7 @@
   color: $color;
   background: $bg;
   letter-spacing: 0.05em;
-  transition: $transition;
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
   box-shadow: var(--box-shadow);
 
   &:hover {
@@ -69,6 +69,10 @@
   flex-direction: $flex-direction;
   align-items: $align-items;
   justify-content: $justify-content;
+}
+
+@mixin border($opacity) {
+    border: 1px solid rgba(255, 255, 255, $opacity);
 }
 
 // Mobile devices

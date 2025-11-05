@@ -1,0 +1,9 @@
+@use '../../../styles/mixins' as *;
+
+.buttonReset {
+  @include btn(transparent, var(--accent,), var(--text), 8px);
+}
+
+.submitBtn {
+  @include btn(var(--accent), var(--card), var(--text), 8px);
+}
