@@ -3,7 +3,6 @@ import { TaskHeader } from "../../components";
 export const TaskTwo = () => {
   return (
     <div>
-      <TaskHeader text={"Recruitment Task 2"} />
       <p>
         Write a React program to validate a PESEL number according to the
         official format specification. Prepare unit tests that check several

@@ -1,7 +1,22 @@
+@use '../../styles/mixins' as *;
+
+.home {
+    min-height: 75vh;
+}
 .linksWrap {
-    margin: 2rem 0;
+    margin: 3rem 0;
     display: flex;
     flex-wrap: wrap;
     gap: 2rem;
     justify-content: space-around;
+}
+
+.buttonHome {
+    @include btn(var(--muted) );
+   
+}
+
+.btnWrap {
+    @include flex(row, center, center);
+    gap: 2rem;
 }
