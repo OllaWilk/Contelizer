@@ -1,7 +1,7 @@
 import { decodeYearAndMonth } from './decodeYearAndMonth';
 import { isValidDay } from './isValidDay';
 
-export const validatePesel = (pesel: string): number | string => {
+export const validatePesel = (pesel: string): string => {
   //length and digit-only validation
   if (!pesel || pesel.length !== 11) {
     return 'PESEL must be exactly 11 digits long.';
