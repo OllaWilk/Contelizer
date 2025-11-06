@@ -20,6 +20,13 @@ export const TaskTwo = () => {
         />
         {message && <ErrorBlock title="sorry" message={message} />}
       </Card>
+      <p style={{ marginTop: '1rem', fontSize: '0.9rem', color: '#666' }}>
+        The PESEL validation logic and unit tests are located in
+        <code> src/views/TaskTwo </code>. I would fix one of the test cases, but due to limited time
+        I left it as is. In the future, I’d like to improve the visual design of this page and
+        enhance the input UX — for example, by showing the error message only after pressing a
+        validation button instead of immediately while typing.
+      </p>
     </div>
   );
 };
