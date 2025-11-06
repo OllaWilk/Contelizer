@@ -3,6 +3,7 @@ export { Navbar } from './Navbar/Navbar';
 export { Header } from './Header/Header';
 export { LoadingIndicator } from './UI/LoadingIndicator/LoadingIndicator';
 export { ErrorBlock } from './UI/ErrorBlick/ErrorBlock';
+export { SuccesBlock } from './UI/SuccesBlock/SuccesBlock';
 export { TaskHeader } from './UI/TaskHeader/TaskHeader';
 export { Input } from './UI/Input/Input';
 export { Textarea } from './UI/Textarea/Textarea';
