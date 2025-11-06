@@ -18,6 +18,16 @@ describe('validatePesel', () => {
   it('should return an error when PESEL has valid length and digits only.', () => {
     expect(validatePesel('12345678901')).toBe('Read for further checks');
   });
+
+  // Incorrect checksum
+  it('should return an error when PESEL has an invalid checksum digit.', () => {
+    expect(validatePesel('44051401358')).toBe('Invalid PESEL checksum.');
+  });
+
+  // Correct checksum (valid PESEL)
+  it('should confirm when PESEL is fully valid.', () => {
+    expect(validatePesel('44051401359')).toBe('Valid PESEL number.');
+  });
 });
 
 //Non-existent date
