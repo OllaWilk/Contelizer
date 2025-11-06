@@ -1,6 +1,6 @@
 import { validatePesel } from './utils/validatePesel';
 
-describe('validatePesel', () => {
+describe('validatePesel - basic format validatoin', () => {
   //Incorrect length (less/more than 11 )
   it('should return an error when PESEL has less or more than 11 characters.', () => {
     expect(validatePesel('123')).toBe('PESEL must be exactly 11 digits long.');
@@ -14,7 +14,9 @@ describe('validatePesel', () => {
     expect(validatePesel('12345 78901')).toBe('PESEL must contain only digits.');
     expect(validatePesel('12345-78901')).toBe('PESEL must contain only digits.');
   });
+});
 
+describe('validatePesel - checksum validation', () => {
   //valid pesel
   it('should return an error when PESEL has valid length and digits only.', () => {
     expect(validatePesel('12345678901')).toBe('Invalid PESEL checksum.');
@@ -31,6 +33,10 @@ describe('validatePesel', () => {
   });
 });
 
-//Non-existent date
-//Invalid month/century encoding
-//correct format and date but wrong checksum digit
+describe('validatePesel - birth date validation', () => {
+  // Tu w następnym kroku dodamy testy z poprzedniej wiadomości:
+  // - invalid month (00)
+  // - invalid encoded century
+  // - non-existent day (Feb 30, Apr 31)
+  // - leap year edge cases
+});
