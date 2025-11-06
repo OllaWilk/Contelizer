@@ -5,6 +5,7 @@ import styles from "./Home.module.scss";
 export const Home = () => {
   return (
     <div>
+      <h2>Hi, My name is Aleksandra Wilk</h2>
       <p>
         This small application was built as part of a React recruitment task
         set. Each challenge demonstrates a different aspect of frontend
