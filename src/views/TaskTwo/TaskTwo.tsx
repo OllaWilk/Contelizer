@@ -1,14 +1,25 @@
-import { TaskHeader } from "../../components";
+import { useState, useMemo } from 'react';
+import { validatePesel } from './utils/validatePesel';
+import { Card, ErrorBlock, Input, TaskHeader } from '../../components';
+import { UI_TEXTS } from '../TaskOne/content';
 
 export const TaskTwo = () => {
+  const [value, setValue] = useState('');
+  const message = useMemo(() => (value ? validatePesel(value) : ''), [value]);
+
   return (
     <div>
-      <TaskHeader text={"Recruitment Task 2"} />
-      <p>
-        Write a React program to validate a PESEL number according to the
-        official format specification. Prepare unit tests that check several
-        invalid cases and at least one valid PESEL number.
-      </p>
+      <TaskHeader paragraph={UI_TEXTS.tasktwo} />
+      <Card>
+        <Input
+          id="pesel"
+          aria-label="pesel"
+          placeholder="Enter 11-digit PESEL"
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+        />
+        {message && <ErrorBlock title="sorry" message={message} />}
+      </Card>
     </div>
   );
 };
