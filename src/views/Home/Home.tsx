@@ -1,10 +1,11 @@
-import { Btn } from "../../components";
+import { Btn, TaskHeader } from "../../components";
 import { NAV_ITEMS } from "../../config/navigation";
 import styles from "./Home.module.scss";
 
 export const Home = () => {
   return (
-    <div>
+    <div className={styles.home}>
+      <TaskHeader text={"Hi, My name is Aleksandra Wilk"} />
       <p>
         This small application was built as part of a React recruitment task
         set. Each challenge demonstrates a different aspect of frontend
@@ -19,6 +20,18 @@ export const Home = () => {
           </li>
         ))}
       </ul>
+      <div className={styles.btnWrap}>
+        <Btn
+          url="https://www.linkedin.com/in/alex-wilk/"
+          className={styles.buttonHome}
+          text="Visit my LinkedIn"
+        />
+        <Btn
+          url="https://github.com/OllaWilk"
+          text="Visit my Github"
+          className={styles.buttonHome}
+        />
+      </div>
     </div>
   );
 };
