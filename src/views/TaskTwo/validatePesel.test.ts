@@ -6,6 +6,7 @@ describe('validatePesel', () => {
     expect(validatePesel('123')).toBe('PESEL must be exactly 11 digits long.');
     expect(validatePesel('123456789012')).toBe('PESEL must be exactly 11 digits long.');
   });
+
   //Non-digit characters (letters, spaces, hypens)
 
   it('should return an error when PESEL contains non-digit characters.', () => {
@@ -16,7 +17,7 @@ describe('validatePesel', () => {
 
   //valid pesel
   it('should return an error when PESEL has valid length and digits only.', () => {
-    expect(validatePesel('12345678901')).toBe('Read for further checks');
+    expect(validatePesel('12345678901')).toBe('Invalid PESEL checksum.');
   });
 
   // Incorrect checksum
