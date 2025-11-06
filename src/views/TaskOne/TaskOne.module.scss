@@ -3,6 +3,8 @@
 
 .taskOne {
   padding-inline: clamp(16px, 4vw, 48px);
+  @include flex(column, stretch, center);
+  min-height: 78vh;
 
   .grid {
     display: grid;

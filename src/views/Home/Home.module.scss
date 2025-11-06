@@ -1,7 +1,7 @@
 @use '../../styles/mixins' as *;
 
 .home {
-  min-height: 76vh;
+  min-height: 78vh;
   @include flex(column, stretch, center);
   gap: 2rem;
 }
@@ -20,10 +20,6 @@
 .btnWrap {
   @include flex(row, center, center);
   gap: 2rem;
-
-  a {
-    // width: 30%;
-  }
 }
 
 .buttonTask {
