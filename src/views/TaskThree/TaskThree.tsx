@@ -2,7 +2,14 @@ import { useQuery } from "@tanstack/react-query";
 import type { User } from "../../types/task-three-types";
 import { fetchUsers } from "./utils/http";
 import { UI_TEXTS } from "../TaskOne/content";
-import { Btn, Card, InfoRow, TaskHeader } from "../../components";
+import {
+  Btn,
+  Card,
+  ErrorBlock,
+  InfoRow,
+  LoadingIndicator,
+  TaskHeader,
+} from "../../components";
 import styles from "./TaskThree.module.scss";
 
 export const TaskThree = () => {
@@ -11,9 +18,15 @@ export const TaskThree = () => {
     queryFn: fetchUsers,
   });
 
-  if (isLoading) return <p>Loading cocktails...</p>;
+  if (isLoading) return <LoadingIndicator text="Loading coctails..." />;
 
-  if (error instanceof Error) return <p>{error.message}</p>;
+  if (error instanceof Error)
+    return (
+      <ErrorBlock
+        title="An error occurred"
+        message={"Failed to fetch events."}
+      />
+    );
 
   return (
     <div className={styles.taskThree}>
