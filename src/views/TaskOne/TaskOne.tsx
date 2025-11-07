@@ -8,10 +8,9 @@ import {
   ErrorBlock,
   FormButton,
   Input,
+  LinkBtn,
   Output,
   TaskHeader,
-  Btn,
-  LinkBtn,
 } from "../../components";
 import { useFileField } from "./hooks/useFileField";
 import { useMixedText } from "./hooks/useMixedText";
