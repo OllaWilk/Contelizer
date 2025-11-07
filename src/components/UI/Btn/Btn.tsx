@@ -2,19 +2,17 @@ import styles from "./Btn.module.scss";
 
 interface Props {
   text: string;
-  url: string;
-  download?: boolean;
   className?: string;
+  onClick?: () => void;
 }
-export const Btn = ({ text, url, download, className, ...props }: Props) => {
+export const Btn = ({ text, className, onClick, ...props }: Props) => {
   return (
-    <a
-      href={url}
+    <button
       className={className ?? styles.detailsBtn}
-      download={download ? "" : undefined}
       {...props}
+      onClick={onClick}
     >
       {text}
-    </a>
+    </button>
   );
 };
