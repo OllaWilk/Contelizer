@@ -3,9 +3,12 @@ import type { User } from '../../../types/task-three-types';
 const apiUrl = import.meta.env.VITE_API_URL;
 const token = import.meta.env.VITE_GOREST_TOKEN;
 
-export const fetchUsers = async (perPage = 500): Promise<User[]> => {
-  console.log(perPage);
-  const response = await fetch(`${apiUrl}/users?per_page=${perPage}`);
+export const fetchUsers = async (perPage = 500, searchTerm = ''): Promise<User[]> => {
+  const query = searchTerm
+    ? `?per_page=${perPage}&name=${encodeURIComponent(searchTerm)}`
+    : `?per_page=${perPage}`;
+
+  const response = await fetch(`${apiUrl}/users${query}`);
 
   if (!response.ok) {
     const error = new Error('Failed to fetch cocktails');
