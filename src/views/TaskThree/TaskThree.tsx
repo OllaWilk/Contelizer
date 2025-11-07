@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import type { User } from "../../types/task-three-types";
 import { fetchUsers } from "./utils/http";
@@ -9,14 +10,21 @@ import {
   InfoRow,
   LoadingIndicator,
   TaskHeader,
+  UserForm,
 } from "../../components";
 import styles from "./TaskThree.module.scss";
 
 export const TaskThree = () => {
+  const [editingUserId, setEditingUserId] = useState<number | null>(null);
+
   const { data, isLoading, error } = useQuery<User[]>({
     queryKey: ["users"],
     queryFn: fetchUsers,
   });
+
+  const handleEditUser = (userId: number) => {
+    setEditingUserId((prev) => (prev === userId ? null : userId));
+  };
 
   if (isLoading) return <LoadingIndicator text="Loading coctails..." />;
 
@@ -35,15 +43,25 @@ export const TaskThree = () => {
         {data?.map(({ id, name, email, gender, status }) => (
           <Card key={id}>
             <TaskHeader paragraph={name} />
-            {[
-              { label: "Email", value: email },
-              { label: "Gender", value: gender },
-              { label: "Status", value: status },
-            ].map((item, idx) => (
-              <InfoRow key={idx} label={item.label} value={item.value} />
-            ))}
+            {editingUserId === id ? (
+              <UserForm user={{ id, email, gender, status }} />
+            ) : (
+              <>
+                <InfoRow label={"Email"} value={email} />
+                <InfoRow label={"Gender"} value={gender} />
+                <InfoRow label={"Status"} value={status} />
+              </>
+            )}
             <div className={styles.actions}>
-              <Btn text="Edit" className={styles.editBtn} />
+              {editingUserId === id ? (
+                <button onClick={() => handleEditUser(id)}>cancel</button>
+              ) : (
+                <Btn
+                  text="Edit"
+                  className={styles.editBtn}
+                  onClick={() => handleEditUser(id)}
+                />
+              )}
             </div>
           </Card>
         ))}

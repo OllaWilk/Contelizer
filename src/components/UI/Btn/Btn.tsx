@@ -3,10 +3,15 @@ import styles from "./Btn.module.scss";
 interface Props {
   text: string;
   className?: string;
+  onClick?: () => void;
 }
-export const Btn = ({ text, className, ...props }: Props) => {
+export const Btn = ({ text, className, onClick, ...props }: Props) => {
   return (
-    <button className={className ?? styles.detailsBtn} {...props}>
+    <button
+      className={className ?? styles.detailsBtn}
+      {...props}
+      onClick={onClick}
+    >
       {text}
     </button>
   );

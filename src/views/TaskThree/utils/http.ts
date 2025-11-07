@@ -29,10 +29,12 @@ export const updateUser = async (
     body: JSON.stringify(updatedFields),
   });
 
+  const resData = await res.json();
+
   if (!res.ok) {
     const error = await res.text();
     throw new Error(`Failed to update user: ${error}`);
   }
 
-  return res.json();
+  return resData;
 };

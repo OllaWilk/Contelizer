@@ -13,3 +13,4 @@ export { Output } from "./UI/Output/Output";
 export { Btn } from "./UI/Btn/Btn";
 export { LinkBtn } from "./UI/LinkBtn/LinkBtn";
 export { InfoRow } from "./UI/InfoRow/InfoRow";
+export { UserForm } from "./UserForm/UserForm";
