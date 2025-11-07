@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useUserQuery } from './hooks/useUserQuery';
 import { usePaginationParams } from './hooks/usePaginationParams';
 import { UI_TEXTS } from '../TaskOne/content';
