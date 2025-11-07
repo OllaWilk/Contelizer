@@ -1,15 +1,8 @@
-// const apiUrl = import.meta.env.VITE_API_URL;
-export type User = {
-  id: number;
-  name: string;
-  email: string;
-  gender: "male" | "female";
-  status: "active" | "inactive";
-};
+import type { User } from "../../../types/task-three-types";
 
-const apiUrl = "https://gorest.co.in/public/v2/users";
+const apiUrl = import.meta.env.VITE_API_URL;
 
-export const fetchUsers = async (): Promise<any[]> => {
+export const fetchUsers = async (): Promise<User[]> => {
   const response = await fetch(apiUrl);
 
   if (!response.ok) {
