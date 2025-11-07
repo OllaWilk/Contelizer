@@ -17,7 +17,7 @@ import { useMixedText } from "./hooks/useMixedText";
 import styles from "./TaskOne.module.scss";
 
 export const TaskOne = () => {
-  const [formData, setFormData] = useState<FormData>({ file: null, text: "" });
+  const [formData, setFormData] = useState<FormData>({ file: null, text: '' });
   const { file, error, onChange, reset, validateBeforeSubmit } = useFileField();
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -33,13 +33,13 @@ export const TaskOne = () => {
       setFormData({ file: null, text });
     }
     reset();
-    if (fileInputRef.current) fileInputRef.current.value = "";
+    if (fileInputRef.current) fileInputRef.current.value = '';
   };
 
   const handleReset = () => {
-    setFormData({ file: null, text: "" });
+    setFormData({ file: null, text: '' });
     reset();
-    if (fileInputRef.current) fileInputRef.current.value = "";
+    if (fileInputRef.current) fileInputRef.current.value = '';
   };
 
   const textDisplay = useMixedText(formData.text);
@@ -50,10 +50,7 @@ export const TaskOne = () => {
       <div className={styles.grid}>
         <div className={`${styles.leftColumn}`}>
           <Card className={styles.left}>
-            <form
-              onSubmit={handleSubmit}
-              onReset={() => setFormData({ file: null, text: "" })}
-            >
+            <form onSubmit={handleSubmit} onReset={() => setFormData({ file: null, text: '' })}>
               <h3>{UI_TEXTS.uploadFile}</h3>
               <Input
                 ref={fileInputRef}
@@ -62,23 +59,15 @@ export const TaskOne = () => {
                 accept=".txt,text/plain"
                 onChange={onChange}
               />
-              {error && <ErrorBlock title={"ups"} message={error} />}
+              {error && <ErrorBlock title={'ups'} message={error} />}
               <div className={styles.formActions}>
-                <FormButton
-                  variant="reset"
-                  onClick={handleReset}
-                  text={UI_TEXTS.reset}
-                />
+                <FormButton variant="reset" onClick={handleReset} text={UI_TEXTS.reset} />
                 <FormButton variant="submit" text={UI_TEXTS.submit} />
               </div>
             </form>
           </Card>
           <Card className={styles.preview}>
-            <LinkBtn
-              url="/sample.txt"
-              text={UI_TEXTS.downloadSample}
-              download
-            />
+            <LinkBtn url="/sample.txt" text={UI_TEXTS.downloadSample} download />
           </Card>
         </div>
         <Card className={styles.right}>

@@ -1,0 +1,6 @@
+@use '../../styles/mixins' as *;
+
+.saveBtn {
+  @include btn();
+  width: 100%;
+}

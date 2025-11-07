@@ -1,13 +1,17 @@
-import type { User } from "../../../types/task-three-types";
+import type { User } from '../../../types/task-three-types';
 
 const apiUrl = import.meta.env.VITE_API_URL;
 const token = import.meta.env.VITE_GOREST_TOKEN;
 
-export const fetchUsers = async (): Promise<User[]> => {
-  const response = await fetch(`${apiUrl}/users`);
+export const fetchUsers = async (perPage = 500, searchTerm = ''): Promise<User[]> => {
+  const query = searchTerm
+    ? `?per_page=${perPage}&name=${encodeURIComponent(searchTerm)}`
+    : `?per_page=${perPage}`;
+
+  const response = await fetch(`${apiUrl}/users${query}`);
 
   if (!response.ok) {
-    const error = new Error("Failed to fetch cocktails");
+    const error = new Error('Failed to fetch cocktails');
     throw error;
   }
 
@@ -16,25 +20,20 @@ export const fetchUsers = async (): Promise<User[]> => {
   return data;
 };
 
-export const updateUser = async (
-  id: Pick<User, "id">,
-  updatedFields: Partial<User>
-) => {
+export const updateUser = async (id: number, data: Partial<User>) => {
   const res = await fetch(`${apiUrl}/users/${id}`, {
-    method: "PATCH",
+    method: 'PATCH',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify(updatedFields),
+    body: JSON.stringify(data),
   });
-
-  const resData = await res.json();
 
   if (!res.ok) {
     const error = await res.text();
     throw new Error(`Failed to update user: ${error}`);
   }
 
-  return resData;
+  return res.json();
 };
