@@ -51,19 +51,6 @@ The app fetches a list of users and allows editing user details inside a form (m
 
 ---
 
-## 🐉 Screenshots
-
-### 🏠 Home View  
-![Contelizer Home](https://github.com/user-attachments/assets/0cc4d860-c14b-4dbe-afa8-cc223a64e707.png)
-
-### 🧩 Task One  
-![Contelizer Task One](https://github.com/user-attachments/assets/0f34171e-63d5-4eb3-806c-32dc7bee7881.png)
-
-### ⚙️ Task Three  
-![Contelizer Task Three](https://github.com/user-attachments/assets/07bcd08f-da57-4f8c-98f3-1c988770f22c.png)
-
----
-
 ## 🛠 Tech Stack
 ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
@@ -112,22 +99,22 @@ npm install
 ```
 npm run dev
 ```
+## 🧾 Next Steps
 
-🌱 What I Learned
+- [ ] Move PATCH user update logic to the parent component (`TaskThree`)  
+- [ ] Improve UX in Task Two (avoid showing messages on empty input)  
+- [ ] Fix minor RWD inconsistencies  
+- [ ] Add better API error handling in Task Three  
+- [ ] Fix one unit test in Task Two  
+- [ ] Update validation logic so the error message does not appear when the input is empty  
 
-This project helped me strengthen my understanding of React fundamentals and modern frontend architecture.
-Through the process, I focused on building clean, reusable components and maintaining readable, consistent code.
+---
 
-Key lessons:
+## 🌱 Contact
 
-Structuring a project with separate views and UI components for scalability.
+If you'd like to know more about this project or discuss my work — feel free to reach out.  
+I'm always happy to talk about React, TypeScript, and frontend development.  
 
-Managing server state effectively using React Query.
-
-Handling user input, form validation, and controlled components.
-
-Writing code that is easy to maintain and extend in future iterations.
-
-Designing a consistent and minimal UI using SCSS modules.
-
-Working on Contelizer also gave me a better sense of how to combine good UX, clean code, and clear logic into a complete and polished application.
+📧 **Email:**  alex.dev.wilk@gmail.com
+💼 **LinkedIn:** [Aleksandra Wilk](linkedin.com/in/alex-wilk)  
+🐙 **GitHub:** [OllaWilk](https://github.com/OllaWilk)
