@@ -1,0 +1,12 @@
+@use '../../styles/mixins' as *;
+
+.taskThree {
+  min-height: 76vh;
+  padding-inline: clamp(16px, 4vw, 48px);
+  @include flex(column, stretch, center);
+  gap: 2rem;
+}
+
+.errorBlock {
+  display: flex;
+}
