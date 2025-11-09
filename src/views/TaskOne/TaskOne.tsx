@@ -1,12 +1,20 @@
-import { useState, useRef } from 'react';
-import { UI_TEXTS } from './content';
-import type { FormData } from '../../types/task-one-types';
-import { validateFile } from './utils/validateFile';
-import { readTextFile } from './utils/readTextFile';
-import { Card, ErrorBlock, FormButton, Input, Output, TaskHeader, LinkBtn } from '../../components';
-import { useFileField } from './hooks/useFileField';
-import { useMixedText } from './hooks/useMixedText';
-import styles from './TaskOne.module.scss';
+import { useState, useRef } from "react";
+import { UI_TEXTS } from "./content";
+import type { FormData } from "../../types/task-one-types";
+import { validateFile } from "./utils/validateFile";
+import { readTextFile } from "./utils/readTextFile";
+import {
+  Card,
+  ErrorBlock,
+  FormButton,
+  Input,
+  LinkBtn,
+  Output,
+  TaskHeader,
+} from "../../components";
+import { useFileField } from "./hooks/useFileField";
+import { useMixedText } from "./hooks/useMixedText";
+import styles from "./TaskOne.module.scss";
 
 export const TaskOne = () => {
   const [formData, setFormData] = useState<FormData>({ file: null, text: '' });
