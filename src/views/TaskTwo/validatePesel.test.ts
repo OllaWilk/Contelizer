@@ -31,31 +31,43 @@ describe('validatePesel - basic format validatoin', () => {
 describe('validatePesel - checksum validation', () => {
   //valid pesel
   it('should return an error when PESEL has valid length and digits only.', () => {
-    expect(validatePesel('12345678901')).toBe('Invalid PESEL checksum.');
+    expect(validatePesel('12345678901')).toEqual(
+      expect.objectContaining<Partial<PeselResult>>({ ok: false, code: 'invalid_checksum' })
+    );
   });
 
   // Incorrect checksum 1944-05-14 + checksum 8
   it('should return an error when PESEL has an invalid checksum digit.', () => {
-    expect(validatePesel(pesel('44', '05', '14', '0135', '8'))).toBe('Invalid PESEL checksum.');
+    expect(validatePesel(pesel('44', '05', '14', '0135', '8'))).toEqual(
+      expect.objectContaining<Partial<PeselResult>>({ ok: false, code: 'invalid_checksum' })
+    );
   });
 
   // Correct checksum (valid PESEL) 1944-05-14 + checksum 9
   it('should confirm when PESEL is fully valid.', () => {
-    expect(validatePesel(pesel('44', '05', '14', '0135', '9'))).toBe('Valid PESEL number.');
+    expect(validatePesel(pesel('44', '05', '14', '0135', '9'))).toEqual(
+      expect.objectContaining<Partial<PeselResult>>({ ok: true, code: 'ok' })
+    );
   });
 });
 
 describe('validatePesel - birth date validation', () => {
   // - invalid month (00)  1999-00-00 → invalid month (00)
   it('should return an error for month 00', () => {
-    expect(validatePesel(pesel('99', '00', '00', '1234', '5'))).toBe('Invalid PESEL birth date.');
+    expect(validatePesel(pesel('99', '00', '00', '1234', '5'))).toEqual(
+      expect.objectContaining<Partial<PeselResult>>({ ok: false, code: 'invalid_date' })
+    );
   });
   // February never has 30 days 1999-02-30
   it('returns error for non-existent day (Feb 30)', () => {
-    expect(validatePesel(pesel('99', '02', '30', '1234', '5'))).toBe('Invalid PESEL birth date.');
+    expect(validatePesel(pesel('99', '02', '30', '1234', '5'))).toEqual(
+      expect.objectContaining<Partial<PeselResult>>({ ok: false, code: 'invalid_date' })
+    );
   });
   // April has only 30 days 1999-04-31
   it('should return an error when day does not exist (for example Apr 31)', () => {
-    expect(validatePesel(pesel('99', '04', '31', '1234', '5'))).toBe('Invalid PESEL birth date.');
+    expect(validatePesel(pesel('99', '04', '31', '1234', '5'))).toEqual(
+      expect.objectContaining<Partial<PeselResult>>({ ok: false, code: 'invalid_date' })
+    );
   });
 });
