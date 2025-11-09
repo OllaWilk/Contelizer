@@ -80,7 +80,69 @@ Contelizer
 ├── package.json
 ├── tsconfig.json
 └── vite.config.ts
+
 ```
+### 🧱 Structure Explanation
+
+The project follows a **clean and modular architecture**, designed for clarity, scalability, and easy maintenance.  
+It is built with **React + TypeScript + Vite**, and each feature (task) is organized in a separate folder inside `src/views/`.
+
+---
+
+#### 📂 Root Level
+Contains global configuration and setup files:
+- **package.json**, **tsconfig.json**, **vite.config.ts** – main project configurations (dependencies, TypeScript, bundler)
+- **.env**, **.gitignore**, **eslint.config.js** – environment variables, Git rules, and linting setup
+
+---
+
+#### 🗂 Public
+Holds static files directly served by Vite:
+- **index.html** – main HTML entry point  
+- **favicon.svg** – browser tab icon  
+
+---
+
+#### 💡 Src
+Main application folder containing all logic, UI, and styling.
+
+##### **/components**
+Reusable UI building blocks (e.g., inputs, cards, success/error blocks) used across multiple tasks for visual consistency.
+
+##### **/types**
+TypeScript interfaces and types shared between modules, ensuring type safety across the project.
+
+##### **/utils**
+General helper functions (e.g., formatting, parsing, validation) used globally.
+
+##### **/styles**
+Global SCSS variables and shared styles for typography, colors, and spacing.
+
+---
+
+#### 🧩 Views
+Each folder under `src/views` represents an independent feature or coding task.
+
+- **TaskOne** → text transformation logic and `.txt` file handling  
+- **TaskTwo** → PESEL validation logic, unit tests, and UX handling  
+- **TaskThree** → user management view with API integration and form editing  
+
+Each task is **self-contained**, making it easy to maintain and extend the project in the future.
+
+---
+
+#### ⚙️ Other Core Files
+- **App.tsx** – main component defining the app layout and routing  
+- **Layout.tsx** – reusable wrapper for consistent page layout  
+- **main.tsx** – React entry point mounting the app  
+- **setupTests.ts** – Jest configuration for unit testing  
+
+---
+
+> 🧭 The overall structure follows a **feature-based approach**, ensuring a clear separation of concerns.  
+> Shared logic lives in `/components`, `/types`, and `/utils`, while task-specific functionality is kept neatly inside `/views`.
+
+
 ## 🦄 Installation and Setup
 
 **Clone the project:**
@@ -116,5 +178,5 @@ If you'd like to know more about this project or discuss my work — feel free t
 I'm always happy to talk about React, TypeScript, and frontend development.  
 
 📧 **Email:**  alex.dev.wilk@gmail.com
-💼 **LinkedIn:** [Aleksandra Wilk](linkedin.com/in/alex-wilk)  
+💼 **LinkedIn:** [Aleksandra Wilk](https://www.linkedin.com/in/alex-wilk)  
 🐙 **GitHub:** [OllaWilk](https://github.com/OllaWilk)
