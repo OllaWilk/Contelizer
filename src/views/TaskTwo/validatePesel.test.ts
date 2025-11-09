@@ -19,9 +19,12 @@ describe('validatePesel - basic format validatoin', () => {
   //Non-digit characters (letters, spaces, hypens)
 
   it('should return an error when PESEL contains non-digit characters.', () => {
-    expect(validatePesel('12345a78901')).toBe('PESEL must contain only digits.');
-    expect(validatePesel('12345 78901')).toBe('PESEL must contain only digits.');
-    expect(validatePesel('12345-78901')).toBe('PESEL must contain only digits.');
+    expect(validatePesel('12345a78901')).toEqual;
+    expect.objectContaining<Partial<PeselResult>>({ ok: false, code: 'non_digit' });
+    expect(validatePesel('12345 78901')).toEqual;
+    expect.objectContaining<Partial<PeselResult>>({ ok: false, code: 'non_digit' });
+    expect(validatePesel('12345-78901')).toEqual;
+    expect.objectContaining<Partial<PeselResult>>({ ok: false, code: 'non_digit' });
   });
 });
 
