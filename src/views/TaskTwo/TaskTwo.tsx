@@ -6,15 +6,22 @@ import styles from './TaskTwo.module.scss';
 
 export const TaskTwo = () => {
   const [value, setValue] = useState('');
-  const message = useMemo(() => (value ? validatePesel(value) : ''), [value]);
-  console.log(value, message);
+  const length = value.length;
+
+  const message = useMemo(() => {
+    if (length !== 11) return '';
+    return validatePesel(value);
+  }, [value, length]);
+
+  const remaining = 11 - length;
+
   return (
     <div className={styles.taskTwo}>
       <TaskHeader paragraph={UI_TEXTS.tasktwo} />
-      <p style={{ marginTop: '1rem', fontSize: '0.9rem', color: '#666' }}>
+      <p className={styles.note}>
         The PESEL validation logic and unit tests are located in
         <code> src/views/TaskTwo </code>. I would fix one of the test cases, but due to limited time
-        I left it as is. In the future, I’d like to improve the visual design of this page and
+        I left it as is. In the future, I'd like to improve the visual design of this page and
         enhance the input UX — for example, by showing the error message only after pressing a
         validation button instead of immediately while typing.
       </p>
@@ -25,14 +32,20 @@ export const TaskTwo = () => {
           placeholder="Enter 11-digit PESEL"
           value={value}
           onChange={(e) => setValue(e.target.value)}
-          type="number"
+          type="text"
+          inputMode="numeric"
         />
+        <p className={styles.counter}>
+          {length < 11
+            ? `You need ${remaining} more ${remaining === 1 ? 'digit' : 'digits'}`
+            : '11/11 digits'}
+        </p>
         <div className={styles.errorBlock}>
           {message ? (
             message === 'Valid PESEL number.' ? (
               <SuccesBlock title="HUREY" message={message} />
             ) : (
-              <ErrorBlock title="Błąd" message={message} />
+              <ErrorBlock title="Error" message={message} />
             )
           ) : null}
         </div>
