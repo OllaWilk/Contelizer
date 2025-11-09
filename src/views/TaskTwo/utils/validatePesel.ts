@@ -1,14 +1,24 @@
+import type { PeselResult } from '../../../types/task-two-types';
+import { MESSAGES } from '../content';
 import { decodeYearAndMonth } from './decodeYearAndMonth';
 import { isValidDay } from './isValidDay';
 
-export const validatePesel = (pesel: string): string => {
+export const validatePesel = (raw: string): PeselResult => {
+  const pesel = (raw ?? '').trim();
+
+  if (!pesel) return { ok: false, code: 'empty', ...MESSAGES.empty };
+
   //length and digit-only validation
-  if (!pesel || pesel.length !== 11) {
-    return 'PESEL must be exactly 11 digits long.';
+  if (pesel.length < 11) {
+    return { ok: false, code: 'too_short', ...MESSAGES.too_short };
+  }
+
+  if (pesel.length > 11) {
+    return { ok: false, code: 'too_long', ...MESSAGES.too_long };
   }
 
   if (!/^\d{11}$/.test(pesel)) {
-    return 'PESEL must contain only digits.';
+    return { ok: false, code: 'non_digit', ...MESSAGES.non_digit };
   }
 
   //birth date validation
@@ -18,12 +28,12 @@ export const validatePesel = (pesel: string): string => {
 
   const decoded = decodeYearAndMonth(mmRaw, yy);
   if (!decoded) {
-    return 'Invalid PESEL birth date.';
+    return { ok: false, code: 'invalid_date', ...MESSAGES.invalid_date };
   }
 
   const { month } = decoded;
   if (!isValidDay(month, dd)) {
-    return 'Invalid PESEL birth date.';
+    return { ok: false, code: 'invalid_date', ...MESSAGES.invalid_date };
   }
   //   checksum validation
   const weigths = [1, 3, 7, 9, 1, 3, 7, 9, 1, 3];
@@ -35,8 +45,8 @@ export const validatePesel = (pesel: string): string => {
   const control = (10 - (sum % 10)) % 10;
 
   if (control !== digits[10]) {
-    return 'Invalid PESEL checksum.';
+    return { ok: false, code: 'invalid_checksum', ...MESSAGES.invalid_checksum };
   }
 
-  return 'Valid PESEL number.';
+  return { ok: true, code: 'ok', ...MESSAGES.ok };
 };

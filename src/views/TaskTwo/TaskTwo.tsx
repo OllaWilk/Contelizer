@@ -1,30 +1,30 @@
 import { useState, useMemo } from 'react';
 import { validatePesel } from './utils/validatePesel';
-import { UI_TEXTS } from '../TaskOne/content';
+import { UI_TEXTS } from './content';
 import { Card, ErrorBlock, Input, SuccesBlock, TaskHeader } from '../../components';
 import styles from './TaskTwo.module.scss';
 
 export const TaskTwo = () => {
   const [value, setValue] = useState('');
-  const length = value.length;
-  
-   const message = useMemo(() => {
-    if (length !== 11) return '';
+
+  const result = useMemo(() => {
+    if (!value) return null;
     return validatePesel(value);
-  }, [value, length]);
-  
+  }, [value]);
+
+  const length = value.length;
   const remaining = 11 - length;
-  
+  const lengthMessage =
+    length < 11
+      ? `You need ${remaining} more ${remaining === 1 ? 'digit' : 'digits'}`
+      : '11/11 digits';
+
+  const handlePeselBlur = () => {};
+
   return (
     <div className={styles.taskTwo}>
-      <TaskHeader paragraph={UI_TEXTS.tasktwo} />
-      <p className={styles.note}>
-        The PESEL validation logic and unit tests are located in
-        <code> src/views/TaskTwo </code>. I would fix one of the test cases, but due to limited time
-        I left it as is. In the future, I'd like to improve the visual design of this page and
-        enhance the input UX — for example, by showing the error message only after pressing a
-        validation button instead of immediately while typing.
-      </p>
+      <TaskHeader paragraph={UI_TEXTS.task} />
+      <p className={styles.note}>{UI_TEXTS.note}</p>
       <Card>
         <Input
           id="pesel"
@@ -34,20 +34,19 @@ export const TaskTwo = () => {
           onChange={(e) => setValue(e.target.value)}
           type="text"
           inputMode="numeric"
+          onBlur={handlePeselBlur}
         />
-        <p className={styles.counter}>
-          {length < 11
-            ? `You need ${remaining} more ${remaining === 1 ? 'digit' : 'digits'}`
-            : '11/11 digits'}
-        </p>
+        <p className={styles.counter}>{lengthMessage}</p>
         <div className={styles.errorBlock}>
-          {message ? (
-            message === 'Valid PESEL number.' ? (
-              <SuccesBlock title="HUREY" message={message} />
-            ) : (
-              <ErrorBlock title="Błąd" message={message} />
-            )
-          ) : null}
+          {result && (
+            <>
+              {result.ok ? (
+                <SuccesBlock title="HURRAY" message={result.message} />
+              ) : (
+                <ErrorBlock message={result.hint + ''} title={result.message} />
+              )}
+            </>
+          )}
         </div>
       </Card>
     </div>
