@@ -1,5 +1,5 @@
-@use '../../styles/variables' as *;
-@use '../../styles/mixins' as *;
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
 
 .taskOne {
   padding-inline: clamp(16px, 4vw, 48px);
@@ -8,7 +8,7 @@
 
   .grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: clamp(16px, 2.2vw, 32px);
     align-items: start;
     margin-top: clamp(20px, 3vw, 36px);
@@ -19,9 +19,8 @@
 
     .leftColumn {
       display: grid;
-      grid-template-rows: 1fr 1fr;
+      grid-template-rows: auto auto;
       gap: clamp(12px, 1.8vw, 24px);
-      height: 100%;
     }
   }
 }
@@ -29,6 +28,7 @@
 .formActions {
   @include flex(row, center, center);
   gap: 1rem;
+  margin-top: 1.5rem
 }
 
 .preview {

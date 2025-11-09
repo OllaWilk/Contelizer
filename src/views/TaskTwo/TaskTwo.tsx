@@ -19,6 +19,8 @@ export const TaskTwo = () => {
       ? `You need ${remaining} more ${remaining === 1 ? 'digit' : 'digits'}`
       : '11/11 digits';
 
+  const handlePeselBlur = () => {};
+
   return (
     <div className={styles.taskTwo}>
       <TaskHeader paragraph={UI_TEXTS.task} />
@@ -32,6 +34,7 @@ export const TaskTwo = () => {
           onChange={(e) => setValue(e.target.value)}
           type="text"
           inputMode="numeric"
+          onBlur={handlePeselBlur}
         />
         <p className={styles.counter}>{lengthMessage}</p>
         <div className={styles.errorBlock}>

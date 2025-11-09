@@ -11,3 +11,7 @@ export { Card } from './UI/Card/Card';
 export { FormButton } from './UI/FormButton/FormButton';
 export { Output } from './UI/Output/Output';
 export { Btn } from './UI/Btn/Btn';
+export { Pagination } from './UI/Pagination/Pagination';
+export { LinkBtn } from './UI/LinkBtn/LinkBtn';
+export { InfoRow } from './UI/InfoRow/InfoRow';
+export { UserForm } from './UserForm/UserForm';
