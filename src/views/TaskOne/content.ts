@@ -6,6 +6,4 @@ export const UI_TEXTS = {
   resultTitle: 'Shuffled text',
   previewInfo: 'A preview will be visible after entering text.',
   downloadSample: 'Download sample .txt file',
-  tasktwo:
-    'Write a React program to validate a PESEL number according to the official format specification. Prepare unit tests that check several invalid cases and at least one valid PESEL number.',
 };
