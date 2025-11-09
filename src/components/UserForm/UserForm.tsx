@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { updateUser } from '../../views/TaskThree/utils/http';
 import { useState } from 'react';
-import type { User } from '../../types/task-three-types';
+import type { EditableKeys, User } from '../../types/task-three-types';
 import { Input } from '../UI/Input/Input';
 import { Select } from '../UI/Select/Select';
 import styles from './UserForm.module.scss';
@@ -28,6 +28,13 @@ export const UserForm = ({ user }: Props) => {
     },
   });
 
+  const handleInputChange = (
+    key: EditableKeys,
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    setUserData((prev) => ({ ...prev, [key]: e.target.value }));
+  };
+
   const handleSave = (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -44,29 +51,24 @@ export const UserForm = ({ user }: Props) => {
     <form className={styles.form} onSubmit={handleSave}>
       <Input
         id={'name-' + user.id}
-        label="Name"
+        label="name"
         type="text"
         value={userData.name}
-        onChange={(e) => setUserData((prev) => ({ ...prev, name: e.target.value }))}
+        onChange={(e) => handleInputChange('name', e)}
       />
       <Input
         id={'email-' + user.id}
         label="Email"
         type="email"
         value={userData.email}
-        onChange={(e) => setUserData((prev) => ({ ...prev, email: e.target.value }))}
+        onChange={(e) => handleInputChange('email', e)}
       />
 
       <Select
         id={'gender-' + user.id}
         label="Gender"
         value={userData.gender}
-        onChange={(e) =>
-          setUserData((prev) => ({
-            ...prev,
-            gender: e.target.value as User['gender'],
-          }))
-        }
+        onChange={(e) => handleInputChange('gender', e)}
         options={[
           { value: 'male', label: 'male' },
           { value: 'female', label: 'female' },
@@ -77,12 +79,7 @@ export const UserForm = ({ user }: Props) => {
         id={'status-' + user.id}
         label="Status"
         value={userData.status}
-        onChange={(e) =>
-          setUserData((prev) => ({
-            ...prev,
-            status: e.target.value as User['status'],
-          }))
-        }
+        onChange={(e) => handleInputChange('status', e)}
         options={[
           { value: 'active', label: 'active' },
           { value: 'inactive', label: 'inactive' },

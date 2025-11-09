@@ -5,3 +5,5 @@ export type User = {
   gender: 'male' | 'female';
   status: 'active' | 'inactive';
 };
+
+export type EditableKeys = 'name' | 'email' | 'gender' | 'status';
