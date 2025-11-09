@@ -7,7 +7,7 @@ import styles from './TaskTwo.module.scss';
 export const TaskTwo = () => {
   const [value, setValue] = useState('');
   const message = useMemo(() => (value ? validatePesel(value) : ''), [value]);
-
+  console.log(value, message);
   return (
     <div className={styles.taskTwo}>
       <TaskHeader paragraph={UI_TEXTS.tasktwo} />
@@ -25,13 +25,16 @@ export const TaskTwo = () => {
           placeholder="Enter 11-digit PESEL"
           value={value}
           onChange={(e) => setValue(e.target.value)}
+          type="number"
         />
         <div className={styles.errorBlock}>
-          {message === 'Valid PESEL number.' ? (
-            <SuccesBlock title="HUREY" message={message} />
-          ) : (
-            <ErrorBlock title="sorry" message={message} />
-          )}
+          {message ? (
+            message === 'Valid PESEL number.' ? (
+              <SuccesBlock title="HUREY" message={message} />
+            ) : (
+              <ErrorBlock title="Błąd" message={message} />
+            )
+          ) : null}
         </div>
       </Card>
     </div>
