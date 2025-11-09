@@ -1,3 +1,4 @@
+import { type PeselResult } from '../../types/task-two-types';
 import { validatePesel } from './utils/validatePesel';
 
 const pesel = (YY: string, MM: string, DD: string, ZZZZ: string, K: string) =>
@@ -6,8 +7,13 @@ const pesel = (YY: string, MM: string, DD: string, ZZZZ: string, K: string) =>
 describe('validatePesel - basic format validatoin', () => {
   //Incorrect length (less/more than 11 )
   it('should return an error when PESEL has less or more than 11 characters.', () => {
-    expect(validatePesel('123')).toBe('PESEL must be exactly 11 digits long.');
-    expect(validatePesel('123456789012')).toBe('PESEL must be exactly 11 digits long.');
+    expect(validatePesel('123')).toEqual(
+      expect.objectContaining<Partial<PeselResult>>({ ok: false, code: 'too_short' })
+    );
+
+    expect(validatePesel('123456789012')).toEqual(
+      expect.objectContaining<Partial<PeselResult>>({ ok: false, code: 'too_long' })
+    );
   });
 
   //Non-digit characters (letters, spaces, hypens)
